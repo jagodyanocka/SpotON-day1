@@ -15,9 +15,9 @@ import static java.net.http.HttpResponse.BodyHandlers.ofString;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplicationTest {
-
     static HttpClient client = HttpClient.newBuilder().build();
     private static int server_port = Integer.parseInt(String.valueOf(Application.loadProperties().get("server.port")));
+
 
 
     @BeforeAll
@@ -60,7 +60,7 @@ public class ApplicationTest {
             String expected = """
                     {
                         "name": "John"
-                    }
+                    } 
                     """;
             assertEquals(response.statusCode(), 200);
             assertEquals(expected, body);
