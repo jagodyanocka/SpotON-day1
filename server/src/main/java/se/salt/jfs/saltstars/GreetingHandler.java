@@ -33,28 +33,31 @@ public class GreetingHandler implements HttpHandler {
     String getQueryParameter(String parameterName, String queryString) {
 
         String query = "";
-        int counter = 0;
+        boolean bool = false;
+
+        if (parameterName == "name" && parameterName.length() + 1 >= queryString.length()) {
+            return "Unknown Friend";
+        }
 
         for(int i = 0; i < queryString.length(); i++) {
 
-             if(queryString.charAt(i) == '=') {
-                counter += 1;
+            if (queryString.length() > i + 1) {
+                if (queryString.charAt(i) == '=') {
+                    bool = true;
+                }
+
+                if (bool == true && queryString.charAt(i + 1) != '&') {
+                    query += queryString.charAt(i + 1);
+                }
+
+                if(queryString.charAt(i+1) == '&') {
+                    break;
+                }
+
             }
-
-             if(queryString.charAt(i) == '&') {
-                 return query;
-             }
-
-             if(counter == 1) {
-                 if(queryString.charAt(i+1) != '&') {
-                     query += queryString.charAt(i + 1);
-                 }
-             }
         }
 
-        if (parameterName == "name") {
-            return "Unknown Friend";
-        }
-        return "this should work";
+        return query;
+
     }
 }
