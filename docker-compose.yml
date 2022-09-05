@@ -1,0 +1,11 @@
+services:
+  stars-client:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./client/src:/usr/share/nginx/html
+  stars-api:
+    build: server/
+    ports:
+      - "8100:8080"
